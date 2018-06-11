@@ -1,0 +1,129 @@
+﻿@model Cyber_Kitchen.Models.RatingModel[]
+@{
+    ViewBag.Title = "CreateRating";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="alert-info">CHOOSE YOUR CHOICE TO SUIT THE BEST CATERER</h1>
+<p>
+    @Html.ActionLink("New Caterer", "CreateNew", "Restaurant", null, new { @class = "btn btn-primary" })
+</p>
+<form action="CreateRating" method="post">
+
+    <table id="ratings" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Select Caterers</th>
+                <th class="col-md-offset-1">Taste</th>
+                <th>Quality</th>
+                <th>Quantity</th>
+                <th>Customer Service</th>
+                <th>TimeLiness</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Voters\
+                Count(); i++)
+            {
+                var restuarant = ViewBag.restaurants;
+               <tr>
+                   
+                  @*<td>*@
+                      @*<div>
+                          @Html.ActionLink(restaurant.RestName, "CreateRating", "Restaurant", new { id = restaurant.RestId }, null)
+                      </div>*@
+                  @*</td>*@
+                    <td>
+                        <div class="form-group row">
+                            <label class="control-label col-md-3">
+                                Restaurant Name
+                                <span class="required" aria-required="true"> * </span>
+                            </label>
+                            
+                                <div class="col-md-12">
+                                    <input type="text" name="RatingModel[]" />
+                                    @Html.TextBoxFor(m => m.Restaurant.RestName, new { @class = "form-control input-height", placeholder = "enter restaurant name" })
+                                    @Html.ValidationMessageFor(m => m.Restaurant.RestName, "", new { @class = "text-danger" })
+                                </div>
+
+                          
+                        </div>
+                           
+                    </td>
+                    <td>
+                        <select id="taste" name="Taste">
+                            <option value="">select</option>
+                            <option value="1">Very Bad</option>
+                            <option value="2">Bad</option>
+                            <option value="3">Neutral</option>
+                            <option value="4">Good</option>
+                            <option value="5">Excelent</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="quality" name="Quality">
+                            <option value="">select</option>
+                            <option value="1">Very Bad</option>
+                            <option value="2">Bad</option>
+                            <option value="3">Neutral</option>
+                            <option value="4">Good</option>
+                            <option value="5">Excelent</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="quantity" name="Quantity">
+                            <option value="">select</option>
+                            <option value="1">Very Bad</option>
+                            <option value="2">Bad</option>
+                            <option value="3">Neutral</option>
+                            <option value="4">Good</option>
+                            <option value="5">Excelent</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div>
+
+                            <select id="timeliness" name="TimeLiness">
+                                <option value="">select</option>
+                                <option value="1">Very Bad</option>
+                                <option value="2">Bad</option>
+                                <option value="3">Neutral</option>
+                                <option value="4">Good</option>
+                                <option value="5">Excelent</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <select id="customerServices" name="CustomerServices">
+                                <option value="">select</option>
+                                <option value="1">Very Bad</option>
+                                <option value="2">Bad</option>
+                                <option value="3">Neutral</option>
+                                <option value="4">Good</option>
+                                <option value="5">Excelent</option>
+                            </select>
+                        </div>
+                    </td>
+
+                    @*<td><input placeholder="input value" type="number" name="persons[0].lastName"> </td>*@
+
+                </tr>
+            }
+
+    </tbody>
+</table>
+    <div class="form-actions">
+        <div class="row">
+            <div class="offset-md-3 col-md-6 pull-right">
+                <button type="submit" class="btn btn-info" id="submitData">Save</button>
+                <button type="button" class="btn btn-danger">Cancel</button>
+
+            </div>
+            <div class="col-md-1">
+                <a href="@Url.Action("Index","Rating", new { area = ""})" class="btn btn-chatpane">Back To List(s)</a>
+            </div>
+        </div>
+    </div>
+</form>
+

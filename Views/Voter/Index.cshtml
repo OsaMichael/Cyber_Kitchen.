@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Cyber_Kitchen.Models.VoterModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <ol class="breadcrumb page-breadcrumb pull-right"></ol>
+</div>
+<h1 class="alert-info">ELIGIBLE VOTERS</h1>
+<div class="btn-group">
+    @if (User.IsInRole("Admin"))
+    {
+        <a href="@Url.Action("CreateVoter", "Voter")" class="btn btn-info "><i class="fa fa-plus"></i>Add New </a>
+    }
+</div>
+<table class="table table-striped table-bordered table-hover @*table-checkable order-column valign-middle" id="example4*@">
+    <thead>
+        <tr>
+            @if (User.IsInRole("Admin"))
+            {
+                <th> Voter Id </th>
+            }
+        
+            <th> Voter Name </th>
+            <th> Staff NO. </th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th> Date Created </th>
+                <th> Action </th>
+            }
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr class="gradeX odd" role="row" id="row-@item.VoterId">
+                <td class="left"><input type="checkbox" id="checkedMe" data-id="@item.VoterId"></td>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <td class="left">@Html.DisplayFor(modelItem => item.VoterId)</td>
+                }
+         
+                <td>@Html.DisplayFor(modelItem => item.VotName)</td>
+                <td>@Html.DisplayFor(modelItem => item.StaffNo)</td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>@String.Format("{0:d}", item.CreatedDate)</td>
+                }
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="/Voter/EditVoter?id=@item.VoterId" class="btn btn-primary btn-xs">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a href="/Voter/DeleteVoter?id=@item.VoterId" class="btn btn-danger btn-xs" id="deleteaction" data-id="@item.VoterId" data-name="@item.VotName">
+                            <i class="fa fa-trash-o "></i>
+                        </a>
+                    }
+                   
+
+                </td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>

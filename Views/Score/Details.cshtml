@@ -1,0 +1,123 @@
+﻿@model Cyber_Kitchen.Models.ScoreModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ScoreModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ScoreId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScoreId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VoterId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VoterId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RestId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RestId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Taste)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Taste)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeLiness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeLiness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerServices)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerServices)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalScore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

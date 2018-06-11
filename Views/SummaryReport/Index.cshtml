@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Cyber_Kitchen.Models.SummaryReportModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12">
+    <ol class="breadcrumb page-breadcrumb pull-right">
+        <li>
+            <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a class="parent-item" href="index">SummaryReport</a>&nbsp;<i class="fa fa-angle-right"></i>
+        </li>
+
+    </ol>
+</div>
+<h1 class="alert-info">TOTAL RESULT FOR EACH CATERER</h1>
+<div">
+    <table class="table table-striped table-bordered table-hover ">
+        <thead>
+            <tr>
+                <th> @Html.LabelFor(m => m.FirstOrDefault().RestId) </th>
+                <th> RestName  </th>
+                <th> EntryDate</th>
+                <th> RestSum</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody> 
+            @{ int i = 0;}
+            @foreach (var item in Model)
+            {
+                <tr class="gradeX odd" role="row" id="row-@item.RestId">
+
+                    <td class="left">@{i++;} @i</td>
+
+                    <td>@Html.DisplayFor(modelItem => item.RestName)</td>
+                    <td> @item.EntryDate.ToShortDateString()</td>
+                    <td>@Html.DisplayFor(modelItem => item.RestSum)</td>
+
+                    <td>
+                      
+
+                        @*<a href="/SummaryReport/Details?id=@item.RestId" class="btn btn-primary btn-xs">
+                                <i class="fa fa-pencil"></i>
+                            </a>*@
+
+                        <a href="/SummaryReport/DeleteSummaryReport?id=@item.RestId" class="btn btn-danger btn-xs" id="deleteaction" data-id="@item.RestId" data-name="@item.RestName ">
+                            <i class="fa fa-trash-o "></i>
+                        </a>
+
+                    </td>
+                </tr>
+
+                }
+
+        </tbody>
+    </table>
+    @*<div class="panel-footer">
+        @Html.ActionLink("TOTAL RESULT FOR EACH CATERER", "Details", null, new { @class = "btn btn-info" })
+    </div>*@

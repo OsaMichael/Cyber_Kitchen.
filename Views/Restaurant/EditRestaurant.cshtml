@@ -1,0 +1,56 @@
+﻿@model Cyber_Kitchen.Models.RestaurantModel
+
+@{
+    ViewBag.Title = "EditRestaurant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb page-breadcrumb pull-right">
+    @*<li>
+        <i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+    </li>
+    <li>
+        <a class="parent-item" href="index">Restaurant</a>&nbsp;<i class="fa fa-angle-right"></i>
+    </li>*@
+
+</ol>
+@if (User.IsInRole("Admin"))
+{
+    <h1 class="alert-info">EDIT RESTAURANTS</h1>
+    <div class="card-body" id="bar-parent">
+        <form action="EditRestaurant" method="Post" id="form_sample_1" class="form-horizontal" novalidate="novalidate">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-body">
+                <div class="form-group row">
+                    <label class="control-label col-md-3">
+                        Restaurant Name
+                        <span class="required" aria-required="true"> * </span>
+                    </label>
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(m => m.RestName, new { @class = "form-control input-height", placeholder = "enter caterer name" })
+                        @Html.ValidationMessageFor(m => m.RestName, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.RestId, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="offset-md-3 col-md-6 pull-right">
+                            <button type="submit" class="btn btn-info" id="submitData">Save</button>
+                            <button type="button" class="btn btn-default">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-1">
+                    <a href="@Url.Action("Index","Restaurant", new { area = "" })" class="btn btn-chatpane">Back To List(s)</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+}
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

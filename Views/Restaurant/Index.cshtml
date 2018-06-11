@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Cyber_Kitchen.Models.RestaurantModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="alert-info">ELIGIBLE RESTAURANTS</h1>
+<div class="btn-group">
+@if (User.IsInRole("Admin"))
+{
+    <a href="@Url.Action("CreateRestaurant", "Restaurant")" class="btn btn-info "><i class="fa fa-plus"></i>Add New </a>
+}
+</div>
+    <table class="table table-striped table-bordered table-hover @*table-checkable order-column valign-middle" id="example4*@">
+      <thead>
+            <tr>
+                @*<th> Rest Id </th>*@
+                <th> Rest Name </th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th> Date Created </th>
+                   
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <th> Action </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="gradeX odd" role="row" id="row-@item.RestId">
+                    @*@if (User.IsInRole("Admin"))
+                {
+                        <td class="left"><input type="checkbox" id="checkedMe" data-id="@item.RestId"></td>
+                }*@
+                    @*<td class="left">@Html.DisplayFor(modelItem => item.RestId)</td>*@
+                    <td>@Html.DisplayFor(modelItem => item.RestName)</td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>@String.Format("{0:d}", item.CreatedDate)</td>
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            <a href="/Restaurant/EditRestaurant?id=@item.RestId" class="btn btn-primary btn-xs">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            @*<a href="#" class="js-cancel-restaurant" data-restaurant-id="@item.RestId" data-name="@item.RestName">Cancel</a>*@
+                            <a href="/Restaurant/DeleteRestaurant?id=@item.RestId" class="btn btn-danger btn-xs" id="deleteaction" data-id="@item.RestId" data-name="@item.RestName">
+                                    <i class="fa fa-trash-o "></i>
+                                </a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+@*@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-cancel-restaurant").click(function (e)
+            {
+                var link = $(e.target);
+
+                if (confirm("Are you sure you want to delete this restaurant")) {
+                    $.ajax({
+                        url: "/api/restaurant/" + link.attr("data-restaurant-id"),
+                        method: "DELETE"
+                    })
+                    .done(function () {
+                        link.parents("li").fadeOut(function () {
+                            $(this).remove();
+                        });
+                    })
+                    .fail(function () {
+                        alert("Something failed!");
+                    });
+                }
+            });
+        });
+    </script>
+  }*@
+
+
+
+
+

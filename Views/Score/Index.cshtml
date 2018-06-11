@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Cyber_Kitchen.Models.ScoreModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <ol class="breadcrumb page-breadcrumb pull-right">
+    </ol>
+</div>
+
+<h1 class="alert-info">DETAILS OF EACH VOTING</h1>
+<div class="btn-group">
+    @if (User.IsInRole("Admin"))
+    {
+        <a href="@Url.Action("CreateScore", "Score")" class="btn btn-info "><i class="fa fa-plus"></i>Add New </a>
+    }
+   
+</div>
+
+<div">
+    <table class="table table-striped table-bordered table-hover ">
+        <thead>
+            <tr>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th> Score Id </th>
+                }
+              
+                <th> @Html.LabelFor(m => m.FirstOrDefault().VoterId) </th>
+                <th> @Html.LabelFor(m => m.FirstOrDefault().RestId) </th>
+                <th> Taste  </th>
+                <th> Quality </th>
+                <th> Quantity</th>
+                <th> TimeLiness </th>
+                <th>CustomerServices</th>
+                <th> TotalScore</th>
+              
+                @if (User.IsInRole("Admin"))
+                {
+                    <th> Date Created </th>
+                    <th> Action </th>
+                }
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="gradeX odd" role="row" id="row-@item.ScoreId">
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td class="left">@Html.DisplayFor(modelItem => item.ScoreId)</td>
+                    }
+                    
+                    <td>@Html.DisplayFor(modelItem => item.Voters.VotName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Restaurant.RestName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Taste)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quality)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TimeLiness)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CustomerServices)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalScore)</td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>@String.Format("{0:d}", item.CreatedDate)</td>
+                    }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @*<a href="/Score/DeleteScore?id=@item.ScoreId" class="btn btn-danger btn-xs" id="deleteaction" data-id="@item.ScoreId" data-name="@item.ScoreId">
+                                    <i class="fa fa-trash-o "></i>
+                                </a>*@
+                                @*<a href="/Score/DeleteScore?id=@item.ScoreId" class="js-delete-score" data-score-id="@item.ScoreId">Delete</a>*@
+                                <a href="/Score/DeleteScore/7" class="js-delete-score">Delete</a>
+
+                            </td>
+                        } 
+                </tr>
+            }
+
+        </tbody>
+    </table>
+   
+
+    @section scripts
+        {
+            <script>
+                $(document).ready(function () {
+                    $(".js-delete-score").click(function (e)
+                    {
+                        var link = $(e.target);
+
+                        if (confirm("Are you sure you want to delete this score")) {
+                            $.ajax({
+                                url: "/api/score/" + link.attr("data-score-id"),
+                                method: "DELETE"
+                            })
+                            .done(function () {
+                                link.parents("li").fadeOut(function () {
+                                    $(this).remove();
+                                });
+                            })
+                            .fail(function () {
+                                alert("Something failed!");
+                            });
+                        }
+                    });
+                });
+            </script>
+          }
+    @*<a href="/Score/DeleteScore/7" class="delete">Delete</a>*@
